@@ -6,6 +6,10 @@
     --text-color: #333;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Cairo', sans-serif;
     text-align: center;
@@ -44,9 +48,11 @@ form {
     margin-bottom: 20px;
 }
 
+/* تعديل الحقول بحيث يكون لها مساحة داخلية إضافية (padding) وعدم الالتصاق بالحواف */
 input, textarea, select {
     width: 100%;
     padding: 10px;
+    margin: 0 5px; /* إضافة هامش أفقي بسيط */
     border-radius: 8px;
     border: 1px solid var(--gold);
     font-size: 16px;
@@ -63,6 +69,7 @@ button {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 0 5px; /* نفس الهامش الأفقي للحفاظ على التناسق */
 }
 
 button:hover {
@@ -119,9 +126,11 @@ button:hover {
     input, textarea, select {
         padding: 8px;
         font-size: 14px;
+        margin: 0 5px;
     }
     button {
         padding: 8px;
         font-size: 16px;
+        margin: 0 5px;
     }
 }
