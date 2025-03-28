@@ -16,17 +16,12 @@ body {
     background: linear-gradient(to bottom, var(--green), var(--gold));
     color: var(--text-color);
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
     background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
+    padding: 30px; /* زيادة الحشوة لتوفير مساحة داخلية أكبر */
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     width: 90%;
@@ -38,21 +33,22 @@ h1 {
     font-family: 'Amiri', serif;
     font-size: 36px;
     color: var(--gold);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 15px; /* زيادة الفجوة بين الحقول */
     margin-bottom: 20px;
 }
 
-/* تعديل الحقول بحيث يكون لها مساحة داخلية إضافية (padding) وعدم الالتصاق بالحواف */
 input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin: 0 5px; /* إضافة هامش أفقي بسيط */
+    display: block;
+    width: 90%;
+    padding: 12px;
+    margin: 10px auto; /* هامش أفقي ورأسي لضمان المسافة بين الحقول والحواف */
     border-radius: 8px;
     border: 1px solid var(--gold);
     font-size: 16px;
@@ -60,16 +56,18 @@ input, textarea, select {
 }
 
 button {
+    display: block;
+    width: 90%;
     background: var(--gold);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
+    margin: 10px auto;
     transition: all 0.3s ease;
-    margin: 0 5px; /* نفس الهامش الأفقي للحفاظ على التناسق */
 }
 
 button:hover {
@@ -81,8 +79,7 @@ button:hover {
     margin-top: 20px;
     width: 90%;
     max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
 }
 
 .message-box {
@@ -118,19 +115,15 @@ button:hover {
     }
     .container {
         width: 95%;
-        padding: 15px;
+        padding: 20px;
     }
     h1 {
         font-size: 28px;
     }
-    input, textarea, select {
-        padding: 8px;
+    input, textarea, select, button {
+        width: 95%;
+        padding: 10px;
         font-size: 14px;
-        margin: 0 5px;
-    }
-    button {
-        padding: 8px;
-        font-size: 16px;
-        margin: 0 5px;
+        margin: 8px auto;
     }
 }
