@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد مبارك 🎉</title>
+    <!-- الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap">
+    <!-- ربط ملف CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- عرض عدد التهاني -->
+    <p id="messageCount" style="font-weight: bold; font-size: 18px;">جارٍ تحميل عدد التهاني...</p>
+
+    <div class="container">
+        <h1>🎉 أرسل تهنئتك لعيد الفطر 🎉</h1>
+        <form id="greetForm" onsubmit="event.preventDefault(); sendGreeting();">
+            <input type="text" id="name" placeholder="أدخل اسمك" required>
+            <textarea id="message" placeholder="أدخل رسالتك" required></textarea>
+            <!-- قائمة اختيار الدولة -->
+            <select id="country" required>
+                <option value="">اختر الدولة</option>
+                <option value="Afghanistan">أفغانستان</option>
+                <option value="Algeria">الجزائر</option>
+                <option value="Bahrain">البحرين</option>
+                <option value="Bangladesh">بنغلاديش</option>
+                <option value="Comoros">جزر القمر</option>
+                <option value="Djibouti">جيبوتي</option>
+                <option value="Egypt">مصر</option>
+                <option value="Indonesia">إندونيسيا</option>
+                <option value="Iran">إيران</option>
+                <option value="Iraq">العراق</option>
+                <option value="Jordan">الأردن</option>
+                <option value="Kuwait">الكويت</option>
+                <option value="Lebanon">لبنان</option>
+                <option value="Libya">ليبيا</option>
+                <option value="Malaysia">ماليزيا</option>
+                <option value="Maldives">جزر المالديف</option>
+                <option value="Mauritania">موريتانيا</option>
+                <option value="Morocco">المغرب</option>
+                <option value="Oman">عمان</option>
+                <option value="Pakistan">باكستان</option>
+                <option value="Palestine">فلسطين</option>
+                <option value="Qatar">قطر</option>
+                <option value="Saudi Arabia">المملكة العربية السعودية</option>
+                <option value="Somalia">الصومال</option>
+                <option value="Sudan">السودان</option>
+                <option value="Syria">سوريا</option>
+                <option value="Tajikistan">طاجيكستان</option>
+                <option value="Tunisia">تونس</option>
+                <option value="Turkey">تركيا</option>
+                <option value="Turkmenistan">تركمانستان</option>
+                <option value="United Arab Emirates">الإمارات العربية المتحدة</option>
+                <option value="Uzbekistan">أوزبكستان</option>
+                <option value="Yemen">اليمن</option>
+            </select>
+            <!-- حقل إدخال الولاية/المنطقة -->
+            <input type="text" id="region" placeholder="أدخل الولاية/المنطقة" required>
+            <!-- حقل رقم الهاتف (اختياري) -->
+            <input type="text" id="phone" placeholder="أدخل رقم هاتفك (اختياري)">
+            <button type="submit">✨ إرسال التهنئة</button>
+        </form>
+        <div id="responseMsg"></div>
+    </div>
+
+    <h2 style="color: white;">💬 التهاني</h2>
+    <div class="greetings" id="greetingsContainer"></div>
+
+    <!-- ربط ملف JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

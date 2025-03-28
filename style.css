@@ -1,0 +1,111 @@
+:root {
+    --gold: #d4af37;
+    --green: #006400;
+    --white: #f9f9f9;
+    --dark: #1a1a1a;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, var(--green), var(--gold));
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    margin: 20px;
+}
+
+h1 {
+    font-family: 'Amiri', serif;
+    font-size: 36px;
+    color: var(--gold);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--gold);
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+button {
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #b8860b;
+    transform: scale(1.05);
+}
+
+.greetings {
+    margin-top: 20px;
+}
+
+.message-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    text-align: right;
+    position: relative;
+}
+
+.message-box strong {
+    color: var(--green);
+}
+
+.message-box small {
+    display: block;
+    color: gray;
+    margin-top: 5px;
+}
+
+/* إخفاء زر مشاركة واتساب إن وجد */
+.message-box a {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+}
