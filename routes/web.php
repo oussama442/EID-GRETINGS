@@ -9,6 +9,12 @@ Route::middleware('auth')->prefix('admin/revenue-reports/export')->name('admin.r
     Route::get('/pdf', [RevenueReportExportController::class, 'pdf'])->name('pdf');
 });
 
+Route::get('/health', fn () => response()->json([
+    'status' => 'ok',
+    'app' => 'car-rental',
+    'timestamp' => now()->toISOString(),
+]))->name('health');
+
 Route::get('/', [PublicController::class, 'home'])->name('public.home');
 Route::get('/fleet', [PublicController::class, 'fleet'])->name('public.fleet');
 Route::get('/fleet/{id}', [PublicController::class, 'showCar'])->name('public.car');

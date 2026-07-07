@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "oussama442/car-rental",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Laravel and Filament car rental management system with public booking and mobile API.",
+    "keywords": ["laravel", "filament", "car-rental", "fleet-management"],
     "license": "MIT",
     "require": {
         "php": "^8.2",

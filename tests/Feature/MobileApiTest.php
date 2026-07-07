@@ -53,7 +53,7 @@ class MobileApiTest extends TestCase
         $response->assertStatus(200);
         $this->assertEquals('maintenance', $car->fresh()->status);
 
-        $bookingCar = Car::where('status', 'available')->whereKeyNot($car->id)->first() ?: Car::factory()->create([
+        $bookingCar = Car::factory()->create([
             'status' => 'available',
             'branch_id' => $user->branch_id,
         ]);

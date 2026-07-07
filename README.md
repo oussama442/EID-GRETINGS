@@ -1,59 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Car Rental Management
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel + Filament application for running a car rental operation with a public booking site, admin dashboard, mobile API, fleet tracking, customer records, payments, contracts, and branch-level access control.
 
-## About Laravel
+## Core Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Public fleet browsing with search, filters, date availability, and booking request forms.
+- Filament admin panel for cars, bookings, clients, branches, payments, settings, users, revenue reports, and operational alerts.
+- Mobile API for staff login, dashboard, cars, clients, booking creation, check-in, and check-out.
+- Booking conflict protection across public requests, mobile API, and Filament booking forms.
+- Car lifecycle protection for reserved, active, overdue, completed, cancelled, maintenance, and out-of-service states.
+- PDF contracts, receipts, and revenue reports.
+- Multi-language public/admin setup with English, French, and Arabic language files.
+- GitHub Actions CI for backend tests and frontend build.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2+
+- Laravel 12
+- Filament 5
+- Laravel Sanctum
+- Spatie Laravel Permission
+- DomPDF
+- Tailwind CSS 4
+- Vite
 
-## Learning Laravel
+## Local Setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate --seed
+npm install
+npm run build
+php artisan serve
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Open the app at:
 
-## Laravel Sponsors
+```text
+http://127.0.0.1:8000
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Admin panel:
 
-### Premium Partners
+```text
+http://127.0.0.1:8000/admin
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Default seeded admin:
 
-## Contributing
+```text
+Email: admin@example.com
+Password: password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Useful Commands
 
-## Code of Conduct
+Run tests:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan test
+```
 
-## Security Vulnerabilities
+Build assets:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+npm run build
+```
 
-## License
+Run the full local dev stack:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+composer run dev
+```
+
+Health check:
+
+```text
+GET /health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok",
+  "app": "car-rental"
+}
+```
+
+## Mobile API
+
+Authentication:
+
+```text
+POST /api/login
+GET /api/me
+POST /api/logout
+```
+
+Operations:
+
+```text
+GET /api/dashboard
+GET /api/cars
+GET /api/cars/{id}
+PUT /api/cars/{id}/status
+GET /api/clients
+POST /api/clients
+GET /api/bookings
+POST /api/bookings
+POST /api/bookings/{id}/check-in
+POST /api/bookings/{id}/check-out
+```
+
+The API accepts availability filters on cars:
+
+```text
+GET /api/cars?pickup_datetime=2026-07-10 10:00:00&return_datetime=2026-07-12 10:00:00
+```
+
+## Booking Rules
+
+- A car cannot be booked for overlapping reserved, active, or overdue periods.
+- A rented car cannot be manually marked available while active or overdue bookings exist.
+- Reserved bookings must be checked in before they can be checked out.
+- Completed bookings cannot be checked in again.
+- On check-out, the car becomes reserved if another future reservation exists, otherwise available.
+- Maintenance and out-of-service states are preserved until changed by staff.
+
+## Deployment Notes
+
+- Use a real database in production, not SQLite unless the hosting setup is intentionally single-node.
+- Set `APP_ENV=production`, `APP_DEBUG=false`, and a stable `APP_KEY`.
+- Run `php artisan storage:link` if car/client images are stored on the public disk.
+- Run queue workers if reminders, notifications, or async tasks are added.
+- Configure backups for the database and `storage/app/public`.
+- Point uptime monitoring at `/health`.
+
+## Security Notes
+
+- Never commit `.env`, `auth.json`, storage keys, logs, uploads, `vendor`, or `node_modules`.
+- Keep admin accounts limited to trusted users.
+- Use branch-restricted agent accounts for staff who should only see one location.
+- Rotate credentials after moving from local development to production.
+
+## Repository Status
+
+Current verification:
+
+```text
+php artisan test
+13 tests / 66 assertions passing
+
+npm run build
+passing
+```
